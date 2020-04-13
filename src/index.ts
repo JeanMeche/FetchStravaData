@@ -3,7 +3,7 @@ import { Conf, Config } from './conf';
 import moment from 'moment';
 
 const config: Config = Conf.getConfig();
-const fileName: string = 'activies.json';
+const fileName: string = 'activities.json';
 
 main();
 
@@ -25,7 +25,7 @@ async function main(): Promise<void> {
 }
 
 async function getActivitiesFromDate(page: number): Promise<Activity[]> {
-    console.log(page);
+    console.log('Fetching page', page);
     const startMoment: moment.Moment = moment().year(2016).startOf('year');
     const results = await strava.athlete.listActivities({
         after: startMoment.unix(),
@@ -33,7 +33,7 @@ async function getActivitiesFromDate(page: number): Promise<Activity[]> {
         page,
         access_token: config.access_token
     });
-    console.log('got ', results.length);
+    console.log('got', results.length, 'results');
     return results;
 }
 
